@@ -15,18 +15,34 @@ To get started with the calculator web application, follow these steps:
 
 1. Clone the repository:
 
-  ** git clone <repository_url>**
+  **git clone <repository_url>**
 
 3. Build the application using Maven:
 
-  ** mvn clean install**
+  **mvn clean install**
 
 3. Run the application:
 
-   **mvn spring-boot:run**
+  **mvn spring-boot:run**
 
 4. Access the application in your web browser:
 
-  ** http://localhost:8080**
+  **http://localhost:8080**
+
+How to Create a Docker Image
+
+    Install Docker on your machine following the official Docker documentation for your operating system.
+
+    Clone this repository and navigate to the project directory as described in the previous section.
+
+    Build the Docker image:
+
+    **docker build -t calculator-app .**
+
+    Run the Docker container:
+
+    **docker run -d -p 8080:8080 calculator-app**
+
+    Open your web browser and access the game at http://localhost:8080.
    
    
