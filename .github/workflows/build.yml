@@ -35,9 +35,9 @@ jobs:
           password: ${{ secrets.DOCKER_API_KEY }}
 
       - name: Build Docker Image
-        run: docker build --file Dockerfile --tag calculator-app:latest --build-arg JAR_FILE=./target/*.jar .
+        run: docker build --file Dockerfile_new --tag yogitajadon93/calculator-app:latest --build-arg JAR_FILE=./target/*.jar .
 
       - name: Push Docker Image
         run: |
           echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-          docker push calculator-app:latest
+          docker push yogitajadon93/calculator-app:latest
