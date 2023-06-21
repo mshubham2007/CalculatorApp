@@ -1,6 +1,7 @@
 name: Maven Build
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
@@ -11,10 +12,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    env:
+      BUILD_NO: ${{ github.run_number }}
+      
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2     
 
       - name: Set up JDK
         uses: actions/setup-java@v2
@@ -35,9 +38,8 @@ jobs:
           password: ${{ secrets.DOCKER_API_KEY }}
 
       - name: Build Docker Image
-        run: docker build --file Dockerfile --tag yogitajadon93/calculator-app:${{ env.BRANCH_REF }}-${{ github.run_number }} --build-arg JAR_FILE=./target/*.jar .
+        run: docker build --file Dockerfile --tag yogitajadon93/calculator-app:${BUILD_NO} --build-arg JAR_FILE=./target/*.jar .
 
       - name: Push Docker Image
         run: |
-          #echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-          docker push yogitajadon93/calculator-app:${{ env.BRANCH_REF }}-${{ github.run_number }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/calculator-app:${BUILD_NO}
