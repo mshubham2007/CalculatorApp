@@ -29,20 +29,20 @@ To get started with the calculator web application, follow these steps:
 
   **http://localhost:8080**
 
-How to Create a Docker Image
+# How to Create a Docker Image
 
-    Install Docker on your machine following the official Docker documentation for your operating system.
+Install Docker on your machine following the official Docker documentation for your operating system.
 
-    Clone this repository and navigate to the project directory as described in the previous section.
+Clone this repository and navigate to the project directory as described in the previous section.
 
-    Build the Docker image:
+Build the Docker image:
 
-    **docker build -t calculator-app .**
+  **docker build -t calculator-app .**
 
-    Run the Docker container:
+Run the Docker container:
 
-    **docker run -d -p 8080:8080 calculator-app**
+  **docker run -d -p 8080:8080 calculator-app**
 
-    Open your web browser and access the game at http://localhost:8080.
+Open your web browser and access the game at http://localhost:8080.
    
    
