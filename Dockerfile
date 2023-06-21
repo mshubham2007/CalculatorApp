@@ -1,15 +1,6 @@
-# Use a base image with Java 11 or later
-FROM adoptopenjdk:11-jre-hotspot
+FROM mshubham2007/java17:latest
 ARG JAR_FILE=./target/*.jar
+COPY ${JAR_FILE} /app.jar
 
-# Set the working directory inside the container
-WORKDIR /app
-
-# Copy the JAR file from the Maven build output directory to the container
-COPY ${JAR_FILE} .
-
-# Expose any necessary ports (if your application requires it)
 EXPOSE 8080
-
-# Set the entry point and command to run your application
-ENTRYPOINT ["java", "-jar", "calculatorwebapp-*.jar"]
+CMD ["java", "-jar", "/app.jar"]
