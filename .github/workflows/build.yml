@@ -14,14 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TIMESTAMP: ${{ github.run_number }}
-      BRANCH_NAME: ${{ env.BRANCH_REF }}
       
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
-        
-      - name: Set branch name
-        run: echo "BRANCH_REF=$(basename $GITHUB_REF)" >> $GITHUB_ENV        
+        uses: actions/checkout@v2     
 
       - name: Set up JDK
         uses: actions/setup-java@v2
@@ -42,9 +38,9 @@ jobs:
           password: ${{ secrets.DOCKER_API_KEY }}
 
       - name: Build Docker Image
-        run: docker build --file Dockerfile --tag yogitajadon93/calculator-app:${{ env.BRANCH_NAME }}-${TIMESTAMP} --build-arg JAR_FILE=./target/*.jar .
+        run: docker build --file Dockerfile --tag yogitajadon93/calculator-app:${TIMESTAMP} --build-arg JAR_FILE=./target/*.jar .
 
       - name: Push Docker Image
         run: |
           #echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-          docker push yogitajadon93/calculator-app:${{ env.BRANCH_NAME }}-${TIMESTAMP}
+          docker push yogitajadon93/calculator-app:${TIMESTAMP}
