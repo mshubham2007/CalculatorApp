@@ -47,7 +47,7 @@ jobs:
           file: ./Dockerfile
           build-args: JAR_FILE=./target/*.jar
           load: true
-          tags: mshubham2007/calculator-app:${BUILD_NO}
+          tags: mshubham2007/calculator-app:21
 
       - name: Linux commands post
         run: |
@@ -55,4 +55,4 @@ jobs:
 
       - name: Push Docker Image
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/calculator-app:${BUILD_NO}
+          docker push ${{ secrets.DOCKER_USERNAME }}/calculator-app:21
