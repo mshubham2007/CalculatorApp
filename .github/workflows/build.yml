@@ -47,7 +47,7 @@ jobs:
           file: ./Dockerfile
           build-args: JAR_FILE=./target/*.jar
           load: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/calculator-app:${BUILD_NO}
+          tags: mshubham2007/calculator-app:${BUILD_NO}
 
       - name: Linux commands post
         run: |
