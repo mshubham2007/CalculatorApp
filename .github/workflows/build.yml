@@ -55,4 +55,4 @@ jobs:
 
       - name: Push Docker Image
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/calculator-app:21
+          docker push mshubham2007/calculator-app:21
