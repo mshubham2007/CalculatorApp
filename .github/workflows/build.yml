@@ -3,11 +3,6 @@ name: Maven Build
 on:
   workflow_dispatch:
   push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
 
 jobs:
   build:
@@ -29,7 +24,11 @@ jobs:
         run: mvn clean install
         
       - name: Set up Docker
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v3
+
+      - name: Linux commands pre
+        run: |
+          docker images
         
       - name: Login to Docker Hub
         uses: docker/login-action@v1
@@ -37,8 +36,22 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_API_KEY }}
 
-      - name: Build Docker Image
-        run: docker build --file Dockerfile --tag yogitajadon93/calculator-app:${BUILD_NO} --build-arg JAR_FILE=./target/*.jar .
+      # - name: Build Docker Image
+      #   run: docker build --file Dockerfile --tag yogitajadon93/calculator-app:${BUILD_NO} --build-arg JAR_FILE=./target/*.jar .
+
+      - name: Build CI Image
+        id: build-ci-image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          build-args: JAR_FILE=./target/*.jar
+          load: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/calculator-app:${BUILD_NO}
+
+      - name: Linux commands post
+        run: |
+          docker images
 
       - name: Push Docker Image
         run: |
