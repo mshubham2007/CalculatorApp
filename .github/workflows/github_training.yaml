@@ -10,6 +10,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - name: deploy
         run: echo "deploying to k8s!"      
