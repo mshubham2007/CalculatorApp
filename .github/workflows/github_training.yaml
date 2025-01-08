@@ -10,7 +10,8 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
+    environment: prod
     needs: build
     steps:
       - name: deploy
-        run: echo "deploying to k8s!"      
+        run: echo "deploying to k8s!"
