@@ -5,6 +5,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Hello
-        run: echo "Hello World!"
-      
+      - name: build
+        run: echo "building docker image"
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploy
+        run: echo "deploying to k8s!"      
